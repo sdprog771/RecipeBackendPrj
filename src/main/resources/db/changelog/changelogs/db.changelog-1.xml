@@ -1,0 +1,128 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+
+
+<!--    &lt;!&ndash;NUTRITION&ndash;&gt;-->
+<!--    <changeSet  author="someone"  id="20230508_1">-->
+<!--        <renameColumn  catalogName="cat"-->
+<!--                       columnDataType="varchar(80)"-->
+<!--                       newColumnName="nutri_value"-->
+<!--                       oldColumnName="value"-->
+<!--                       remarks="A String"-->
+<!--                       schemaName="public"-->
+<!--                       tableName="nutrition"/>-->
+<!--    </changeSet>-->
+
+
+
+<!--NUTRITION-->
+    <changeSet id="20230517_1" author="someone">
+
+        <createTable tableName="nutrition">
+            <column name="id" type="bigint" >
+                <constraints primaryKey="true" primaryKeyName="nutrition_id_pk"/>
+            </column>
+            <column name="nutri_value" type="varchar(80)"/>
+            <column name="recipe_id" type="bigint"/>
+        </createTable>
+
+        <createSequence sequenceName="NUTRITION"
+                        schemaName="public"
+                        startValue="1"
+                        incrementBy="50"
+                        dataType="int"
+                        ordered="true"/>
+    </changeSet>
+
+<!--    COOKING TOOLS-->
+    <changeSet id="20230517_2" author="someone">
+
+        <createTable tableName="cooking_tools">
+            <column name="id" type="bigint" >
+                <constraints primaryKey="true" primaryKeyName="cooking_tools_id_pk"/>
+            </column>
+            <column name="tool" type="varchar(80)"/>
+            <column name="quantity" type="varchar(25)"/>
+            <column name="recipe_id" type="bigint"/>
+        </createTable>
+
+        <createSequence sequenceName="COOKING_TOOLS"
+                        schemaName="public"
+                        startValue="1"
+                        incrementBy="50"
+                        dataType="int"
+                        ordered="true"/>
+
+    </changeSet>
+
+
+<!--    INGREDIENTS-->
+    <changeSet id="20230517_3" author="someone">
+
+        <createTable tableName="ingredients">
+            <column name="id" type="bigint" >
+                <constraints primaryKey="true" primaryKeyName="ingredients_id_pk"/>
+            </column>
+            <column name="material" type="varchar(80)"/>
+            <column name="unit" type="varchar(25)"/>
+            <column name="number" type="varchar(25)"/>
+            <column name="recipe_id" type="bigint"/>
+        </createTable>
+
+
+        <createSequence sequenceName="INGREDIENTS"
+                        schemaName="public"
+                        startValue="1"
+                        incrementBy="50"
+                        dataType="int"
+                        ordered="true"/>
+
+    </changeSet>
+
+
+
+<!--    RECIPE-->
+    <changeSet id="20230517_4" author="someone">
+        <createTable tableName="RECIPE">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="recipe_id_pk"/>
+            </column>
+            <column name="title" type="varchar(250)"/>
+            <column name="cuisine" type="varchar(50)"/>
+            <column name="category" type="varchar(50)"/>
+            <column name="preparation_time" type="varchar(20)"/>
+            <column name="cooking_time" type="varchar(20)"/>
+            <column name="source" type="varchar(250)"/>
+<!--            <column name="nutrition" type="varchar(80)">
+                <constraints nullable="false" foreignKeyName="nutrition_id_fk" references="nutrition (id)"/>
+            </column>-->
+            <column name="description" type="varchar(2000)"/>
+<!--            <column name="ingredients" type="varchar(80)">
+                <constraints nullable="false" foreignKeyName="ingredients_id_fk" references="ingredients (id)"/>
+            </column>-->
+<!--            <column name="cooking_tools" type="varchar(80)">
+                <constraints nullable="false" foreignKeyName="cooking_tools_id_fk" references="cooking_tools (id)"/>
+            </column>-->
+        </createTable>
+
+
+        <createSequence sequenceName="MY_RECIPE"
+                        schemaName="public"
+                        startValue="1"
+                        incrementBy="50"
+                        dataType="int"
+                        ordered="true"/>
+
+    </changeSet>
+
+
+
+</databaseChangeLog>
